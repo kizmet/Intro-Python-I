@@ -29,22 +29,39 @@ thismonth = today.month
 thisyear = today.year
 
 
-def getcal(*args):
-    print(len(args))
-    if len(args) > 1:
-        m = args[1][:3]
-        m = list(calendar.month_abbr).index(m)
-        if len(args) > 2:
+def checkinput(*args):
+    if len(args) == 3:
+        try:
+            m = args[1][:3]
+            m = list(calendar.month_abbr).index(m)
             y = int(args[2])
-        else:
+            getcal(m, y)
+        except:
+            print("Expected format: \n\"14_cal.py January 2019\"")
+    elif len(args) == 2:
+
+        try:
+            m = args[1][:3]
             y = thisyear
-    else:
+            m = list(calendar.month_abbr).index(m)
+            getcal(m, y)
+        except:
+            print("Expected format: \n\"14_cal.py January\"")
+    elif len(args) == 1:
         m = thismonth
         y = thisyear
+        getcal(thismonth, thisyear)
+    else:
+        print(
+            "Expected format: \n\"14_cal.py January\" \nor\n\"14_cal.py January 2019\""
+        )
 
+
+def getcal(m, y):
     cal = calendar.TextCalendar(calendar.SUNDAY)
     str = cal.formatmonth(y, m)
     print(str)
 
 
-getcal(*args)
+checkinput(*args)
+# getcal(*args)
