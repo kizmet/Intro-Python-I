@@ -22,3 +22,29 @@ and does the following:
 import sys
 import calendar
 from datetime import datetime
+
+args = sys.argv
+today = datetime.today()
+thismonth = today.month
+thisyear = today.year
+
+
+def getcal(*args):
+    print(len(args))
+    if len(args) > 1:
+        m = args[1][:3]
+        m = list(calendar.month_abbr).index(m)
+        if len(args) > 2:
+            y = int(args[2])
+        else:
+            y = thisyear
+    else:
+        m = thismonth
+        y = thisyear
+
+    cal = calendar.TextCalendar(calendar.SUNDAY)
+    str = cal.formatmonth(y, m)
+    print(str)
+
+
+getcal(*args)
