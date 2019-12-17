@@ -22,3 +22,46 @@ and does the following:
 import sys
 import calendar
 from datetime import datetime
+
+args = sys.argv
+today = datetime.today()
+thismonth = today.month
+thisyear = today.year
+
+
+def checkinput(*args):
+    if len(args) == 3:
+        try:
+            m = args[1][:3]
+            m = list(calendar.month_abbr).index(m)
+            y = int(args[2])
+            getcal(m, y)
+        except:
+            print("Expected format: \n\"14_cal.py January 2019\"")
+    elif len(args) == 2:
+
+        try:
+            m = args[1][:3]
+            y = thisyear
+            m = list(calendar.month_abbr).index(m)
+            getcal(m, y)
+        except:
+            print("Expected format: \n\"14_cal.py January\"")
+    elif len(args) == 1:
+        m = thismonth
+        y = thisyear
+        getcal(thismonth, thisyear)
+    else:
+        print(
+            "Expected format: \n\"14_cal.py January\" \nor\n\"14_cal.py January 2019\""
+        )
+
+
+def getcal(m, y):
+    cal = calendar.TextCalendar(calendar.SUNDAY)
+    str = cal.formatmonth(y, m)
+    print(str)
+
+
+checkinput(*args)
+# getcal(*args)
